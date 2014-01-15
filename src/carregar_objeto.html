@@ -1,0 +1,49 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Carregar Objeto</title>
+
+
+<script id="SistVisual-vs" type="x-shader/x-vertex">
+	attribute vec3 aVertexPosition;
+	attribute vec3 aVertexColor;
+	attribute vec3 aVertexNormal;
+	
+	uniform mat4 uModelMat;
+	uniform mat4 uViewMat;
+	uniform mat4 uProjMat;
+		
+	varying vec4 vColor;
+		
+	void main(void) {
+		vec4 aux = vec4(aVertexNormal.xyz, 1.0);
+		
+ 		gl_Position = uProjMat * uViewMat * uModelMat * vec4(aVertexPosition.xyz, 1.0);
+ 		
+		vColor = vec4(aVertexColor.xyz, 1.0);
+	}
+
+</script>
+
+<script id="SistVisual-fs" type="x-shader/x-fragment">
+	precision mediump float;
+		
+	varying vec4 vColor;
+		
+	void main(void) {		
+		gl_FragColor = vColor;
+	}
+</script>
+
+<script type="text/javascript" src="webgl-utils.js"></script><style type="text/css"></style>
+<script type="text/javascript" src="cuon-utils.js"></script>
+<script type="text/javascript" src="cuon-matrix.js"></script>
+<script type="text/javascript" src="shaders.js"></script>
+<script type="text/javascript" src="OBJGroupParser.js"></script>
+<script type="text/javascript" src="SistVisual.js"></script>
+<script type="text/javascript" src="jquery.min.js"></script>
+
+</head>
+
+<body onload="webGLStart();">
+    <canvas id="SistVisual" style="border: none;" ></canvas>
+</body>
+</html>
